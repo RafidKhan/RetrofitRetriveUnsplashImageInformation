@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         MyApiCall myApiCall = retrofit.create(MyApiCall.class);
 
-        Call<SearchPhotoModel> call = myApiCall.getPhoto("moon", "Qb8NmJOpIwSGOUdh-cgnU4S6R6J8yeOND-y04HhTxqc", "1", "5");
+        Call<SearchPhotoModel> call = myApiCall.getPhoto("sky", "Qb8NmJOpIwSGOUdh-cgnU4S6R6J8yeOND-y04HhTxqc", "1", "5");
 
         /*
         //RecycleSTart
@@ -79,18 +79,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SearchPhotoModel> call, Response<SearchPhotoModel> response) {
                 if (response.isSuccessful()) {
-                    String fetchimg= response.body().getResults().get(3).getUrls().getRegular();
+                    String fetchimg= response.body().getResults().get(2).getUrls().getRegular();
 
-                    String firstName = response.body().getResults().get(3).getUser().getFirstName();
-                    String lastName = response.body().getResults().get(3).getUser().getLastName();
+                    String firstName = response.body().getResults().get(2).getUser().getFirstName();
+                    String lastName = response.body().getResults().get(2).getUser().getLastName();
 
                     String fullName = firstName+" "+lastName;
 
-                    String userName= response.body().getResults().get(3).getUser().getUsername();
-                    String portfolioUrl = response.body().getResults().get(3).getUser().getPortfolioUrl();
+                    String userName= response.body().getResults().get(2).getUser().getUsername();
+                    String portfolioUrl = response.body().getResults().get(2).getUser().getPortfolioUrl();
 
 
-                    String[] images ={fetchimg};
+                   // String[] images ={fetchimg};
 
                    // Log.e("Photo", "Photo"+ fetchimg);
 
@@ -109,8 +109,14 @@ public class MainActivity extends AppCompatActivity {
                             .placeholder(R.drawable.ic_launcher_foreground)
                             .into(imageViewResult);
 
-                    nameResult.setText("User Name: "+userName+"\n"+"Name: "+fullName+"\n"+"Portfolio URL: "+portfolioUrl);
+                    if(portfolioUrl== null)
+                    {
+                        nameResult.setText("User Name: " + userName + "\n" + "Name: " + fullName + "\n");
+                    }
+                    else {
 
+                        nameResult.setText("User Name: " + userName + "\n" + "Name: " + fullName + "\n" + "Portfolio URL: " + portfolioUrl);
+                    }
 
 
 
